@@ -1,4 +1,5 @@
 const ethers = require('ethers');
+require('dotenv').config();
 
 const addresses = {
   WETH: '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2',
@@ -7,7 +8,7 @@ const addresses = {
   recipient: 'address of recipient of funds here',
 }
 
-const mnemonic = 'mnemonic of recipient here';
+const mnemonic = 'mnemonic of recipient here'; // place in .env or .secret
 
 const provider = new ethers.providers.WebSocketProvider('Infura websocket url to mainnet');
 const wallet = ethers.Wallet.fromMnemonic(mnemonic);
@@ -43,7 +44,7 @@ factory.on('PairCreated', async (token0, token1, pairAddress) => {
   const amountIn = ethers.utils.parseUnits('0.1', 'ether');
   const amounts = await router.getAmountsOut(amountIn, [tokenIn, tokenOut]);
   // Execution price will be different for flexibility
-  const amountOutMin = amounts[1].sub(amounts[1].div(10));
+  const amountOutMin = amounts[1].sub(amounts[1].div(10)); // 90% of originally determined amount out
   console.log(`
   Buying new token 
   ================
