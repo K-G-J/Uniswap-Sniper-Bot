@@ -12,7 +12,7 @@ const mnemonic = 'mnemonic of recipient here';
 const provider = new ethers.providers.WebSocketProvider('Infura websocket url to mainnet');
 const wallet = ethers.Wallet.fromMnemonic(mnemonic);
 const account = wallet.connect(provider);
-const factory = new ethers.Contract(addresses.factory, ['event PairCreated(address indexed token 0, address indexed token1, address pair, uint)'], account);
+const factory = new ethers.Contract(addresses.factory, ['event PairCreated(address indexed token0, address indexed token1, address pair, uint);'], account);
 const router = new ethers.Contract(addresses.router, [
   'function getAmountsOut(uint amountIn, address[] memory path) public view returns (uint[] memory amounts);', 'function swapExactTokensForTokens(uint amountIn, uint amountOutMin, address[] calldata path, address to, uint deadline) external returns (uint[] memory amounts);'
 ], account);
